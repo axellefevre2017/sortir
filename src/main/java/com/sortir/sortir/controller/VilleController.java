@@ -59,6 +59,17 @@ public class VilleController {
         return route.getTemplate();
     }
 
+    @PostMapping("/ville/rechercher/")
+    public String search(@RequestParam("ville") String villeParam,Model model){
+
+        VilleRoute route = new VilleRoute();
+        model.addAttribute("route",route);
+        model.addAttribute("filtre", villeParam);
+        model.addAttribute("villes", villeRepository.findAllByVilleContaining(villeParam));
+
+        return route.getTemplate();
+    }
+
 
 
 }

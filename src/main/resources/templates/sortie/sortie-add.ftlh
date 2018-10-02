@@ -9,7 +9,7 @@
 
 <div class="container">
 
-    <form method="post">
+    <form action="/sortie/add/" method="post">
         <div class="form-group">
             <label for="nom">Nom de la sortie</label>
             <input type="text" class="form-control" id="nom" name="nom">
