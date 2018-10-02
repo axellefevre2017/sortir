@@ -21,6 +21,11 @@ public class HomeRoute implements IRoute {
     }
 
     @Override
+    public String getUrl() {
+        return "/";
+    }
+
+    @Override
     public IRoute getParent() {
         return null;
     }
