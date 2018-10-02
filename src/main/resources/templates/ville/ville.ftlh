@@ -53,7 +53,9 @@
                         </div>
                     </th>
                     <th colspan="2">
+
                         <button type="submit" class="btn btn-primary">Ajouter</button>
+
                     </th>
                 </tr>
             </tfoot>
