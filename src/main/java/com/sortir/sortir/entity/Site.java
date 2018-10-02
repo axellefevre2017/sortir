@@ -1,14 +1,13 @@
 package com.sortir.sortir.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "sites")
 public class Site {
 
     @Id
     @Column(name = "no_site")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nom_site")
