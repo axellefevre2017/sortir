@@ -10,6 +10,8 @@ public class Participant {
     @Id
     @Column(name="no_participant")
     private Integer id;
+    private String pseudo;
+    private String password;
     private String nom;
     private String prenom;
     private String telephone;
