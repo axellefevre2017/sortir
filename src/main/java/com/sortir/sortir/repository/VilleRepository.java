@@ -12,4 +12,5 @@ public interface VilleRepository extends JpaRepository<Ville, Integer> {
 
     @Override
     List<Ville> findAll();
+
 }
