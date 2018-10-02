@@ -127,10 +127,10 @@
                         <td>
                             <div style="display:flex;text-align: center;">
                                 <div style="flex:1">
-                                    <a href=""><i class="fas fa-edit"></i></a>
+                                    <a href="/sortie/edit/${sortie.id}/"><i class="fas fa-edit"></i></a>
                                 </div>
                                 <div style="flex:1">
-                                    <a href=""><i class="fas fa-trash-alt"></i></a>
+                                    <a href="/sortie/delete/${sortie.id}/"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
 
