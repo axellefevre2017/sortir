@@ -8,17 +8,24 @@
 <#include "../breadcrumb.ftlh">
 
 <div class="container">
-    <form action="/ville/rechercher/" method="post">
-        <h3>Filtrer les villes</h3>
+    <h3>Filtrer les villes</h3>
+
+
+    <div class="col-lg-12">
         <#if filtre??>
-        <span href="/ville/" class="badge badge-pill badge-primary"><strong>Filtre : </strong> ${filtre}</span>
+            <span href="/ville/" class="badge badge-pill badge-secondary" style="margin-right: 15px;"><strong>Filtre : </strong> ${filtre} <i class="fa fa-times-circle fa-1x" onClick="window.location.href = '/ville/'" style="cursor: pointer;"></i></span>
         </#if>
-        <div class="form-group">
+
+    <form action="/ville/rechercher/" method="post" class="form-inline">
+
+        <div class="form-group" style="margin-right: 15px;margin-top: 5px;">
             <input type="text" class="form-control" id="ville" placeholder="Le nom contient..." name="ville">
         </div>
         <button type="submit" class="btn btn-primary">RECHERCHER</button>
     </form>
-    <div class="col-lg-12"
+    </div>
+
+    <div class="col-lg-12">
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -26,15 +33,24 @@
                 <th>Ville</th>
                 <th>Code Postal</th>
                 <th></th>
-                <th></th>
+
             </tr>
             </thead>
     <#list villes as ville>
     <tr>
         <td>${ville.ville}</td>
         <td>${ville.codePostal}</td>
-        <td>MODIFIER</td>
-        <td>SUPPRIMER</td>
+        <td>
+
+            <div style="display:flex;text-align: center;">
+                <div style="flex:1">
+                    <a href="/ville/edit/${ville.id}/"><i class="fas fa-edit"></i></a>
+                </div>
+                <div style="flex:1">
+                    <a href="/ville/delete/${ville.id}/"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+
     </tr>
     </#list>
             <tfoot>
@@ -52,7 +68,7 @@
                             <input type="text" class="form-control" id="codePostal" name="codePostal">
                         </div>
                     </th>
-                    <th colspan="2">
+                    <th>
 
                         <button type="submit" class="btn btn-primary">Ajouter</button>
 
