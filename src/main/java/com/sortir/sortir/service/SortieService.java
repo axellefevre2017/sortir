@@ -58,4 +58,33 @@ public class SortieService {
         return sortieRepository.save(sortie);
     }
 
+    public Sortie edit(Integer id,String nom, Date date, Integer duree, Date limite, Integer nbMax, String infos, Integer organisateur, Integer lieu, Integer etat){
+
+
+
+        Sortie sortie = sortieRepository.getOne(id);
+
+        Optional<Etat> etatObjet = etatRepository.findById(etat);
+        Optional<Participant> organisateurObjet = participantRepository.findById(organisateur);
+        Optional<Lieu> lieuObjet = lieuRepository.findById(lieu);
+
+        sortie.setNom(nom);
+        sortie.setDateDebut(date);
+        sortie.setDuree(duree);
+        sortie.setDateLimiteInscription(limite);
+        sortie.setNbInscriptionsMax(nbMax);
+        sortie.setInfosSortie(infos);
+        sortie.setEtat(etatObjet.get());
+        sortie.setOrganisateur(organisateurObjet.get());
+        sortie.setLieu(lieuObjet.get());
+
+
+        return sortieRepository.save(sortie);
+    }
+
+    public Optional<Sortie> findById(Integer id){
+
+        return sortieRepository.findById(id);
+    }
+
 }
