@@ -82,6 +82,11 @@ public class SortieService {
         return sortieRepository.save(sortie);
     }
 
+    public void delete(Integer id){
+
+        sortieRepository.deleteById(id);
+    }
+
     public Optional<Sortie> findById(Integer id){
 
         return sortieRepository.findById(id);

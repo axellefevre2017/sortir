@@ -128,5 +128,18 @@ public class SortieController {
         return route.getTemplate();
     }
 
+    @GetMapping("/sortie/delete/{id}/")
+    public String delete(@PathVariable Integer id, Model model) {
+
+        HomeRoute route = new HomeRoute();
+        model.addAttribute("route",route);
+
+        sortieService.delete(id);
+
+        model.addAttribute("sorties", sortieService.findAll());
+
+        return route.getTemplate();
+    }
+
 
 }
