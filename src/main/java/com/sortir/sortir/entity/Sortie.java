@@ -2,12 +2,14 @@ package com.sortir.sortir.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity(name = "sorties")
 public class Sortie {
 
     @Id
     @Column(name="no_sortie")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="nom")
