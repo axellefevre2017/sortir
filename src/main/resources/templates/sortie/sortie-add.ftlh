@@ -9,7 +9,7 @@
 
 <div class="container">
 
-    <form>
+    <form method="post">
         <div class="form-group">
             <label for="nom">Nom de la sortie</label>
             <input type="text" class="form-control" id="nom" name="nom">
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <label for="lieu">Lieu</label>
-            <select class="form-control" id="lieu">
+            <select class="form-control" id="lieu" name="lieu">
                 <#list lieux as lieu>
                     <option value="${lieu.id}">${lieu.libelle}</option>
                 </#list>
@@ -57,6 +57,12 @@
         <div class="form-group">
             <label for="longitude">Longitude</label>
             <input type="text" class="form-control" id="longitude" name="longitude">
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="publier" name="etat">
+            <label class="form-check-label" for="publier" >
+                Publier
+            </label>
         </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
