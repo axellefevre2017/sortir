@@ -62,20 +62,20 @@
             <tfoot>
             <form action="/ville/" method="post">
                 <tr>
-                    <th>
-                        <div class="form-group">
+                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
+
                             <label for="ville">Ville</label>
                             <input type="text" class="form-control" id="ville" name="ville">
-                        </div>
+
                     </th>
-                    <th>
-                        <div class="form-group">
+                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
+
                             <label for="codePostal">Code Postal</label>
                             <input type="text" class="form-control" id="codePostal" name="codePostal">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </div>
+
                     </th>
-                    <th>
+                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
 
                         <button type="submit" class="btn btn-primary">Ajouter</button>
 

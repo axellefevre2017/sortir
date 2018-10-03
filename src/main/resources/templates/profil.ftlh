@@ -6,91 +6,104 @@
 </head>
 <body>
 <#include "menu.ftlh">
-<div style="height:20%; background-color: #1fc8db; background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
 
-</div>
+<center>
+    <div class="card" style="width: 35rem;margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;">
+        <div style="height:120px;background-color: #1fc8db;background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
 
-    <form method="post">
+            <img style="height:200px;width:200px;" class="card-img-top rounded-circle" src="${user.photo}"
+                 alt="Card image cap">
+        </div>
 
 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="pseudo">Pseudo :</label>
-                        <input type="text" class="form-control" id="pseudo" name="pseudo">
-                    </div>
+        <div style="height:100px;">
+        </div>
+
+
+        <div class="card-body" style="text-align: left;">
+            <h5 class="card-title" style="text-align: center;">${user.prenom + ' ' + user.nom}</h5>
+            <hr>
+            <form method="post">
+
+
+                <div class="form-group">
+                    <label for="pseudo">Pseudo :</label>
+                    <input type="text" class="form-control" id="pseudo" name="pseudo">
                 </div>
 
 
-
-
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="prenom">Prénom :</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom">
-                    </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom">
                 </div>
 
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="nom">Nom :</label>
-                <input type="text" class="form-control" id="nom" name="nom">
-            </div>
-        </div>
 
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="telephone">Télephone :</label>
-                <input type="text" class="form-control" id="telephone" name="telephone">
-            </div>
-        </div>
-
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="text" class="form-control" id="email" name="email">
-            </div>
-        </div>
-
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-        </div>
-
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="confirmation_password">Confirmation</label>
-                <input type="password" class="form-control" id="confirmation_password" name="confirmation_password">
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="nom" name="nom">
+                </div>
 
 
-        <div style="flex:1">
-            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="telephone">Télephone :</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="confirmation_password">Confirmation</label>
+                    <input type="password" class="form-control" id="confirmation_password" name="confirmation_password">
+                </div>
+
+
                 <div class="form-group">
                     <label for="ville">Ville de ratachement :</label>
                     <select class="form-control" id="ville" name="ville">
-
+                     <#list sites as site>
+                        <option value="${site.id}">${site.libelle}</option>
+                    </#list>
                     </select>
                 </div>
-            </div>
         </div>
 
-        <div class="col-lg-2">
-            <div class="form-group">
-                <label for="photo">Ma photo</label>
+
+        <div class="form-group">
+            <label for="photo">Ma photo :</label>
+            <div class="col-lg-5">
                 <input type="file" class="form-control" id="photo" name="photo">
             </div>
         </div>
 
 
+        <div style="display:flex;text-align:center;">
 
-         <button type="submit" class="btn btn-primary">Enregistrer</button>
 
-        <button type="submit" class="btn btn-primary">Annuler</button>
+            <div style="flex:1">
+                <button type="submit" class="btn btn-primary">Annuler</button>
+            </div>
+            <div style="flex:1">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
 
-    </form>
-</div>
+        </form>
+
+
+    </div>
+</center>
+
+
 </body>
 </html>
