@@ -18,11 +18,12 @@ public class Participant {
     private String mail;
     private Boolean administrateur;
     private Boolean actif;
+    private String photo;
 
     public Participant() {
     }
 
-    public Participant(Integer id, String pseudo, String password, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif) {
+    public Participant(Integer id, String pseudo, String password, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif, String photo) {
         this.id = id;
         this.pseudo = pseudo;
         this.password = password;
@@ -32,6 +33,7 @@ public class Participant {
         this.mail = mail;
         this.administrateur = administrateur;
         this.actif = actif;
+        this.photo = photo;
     }
 
     public Integer getId() {
@@ -104,5 +106,13 @@ public class Participant {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

@@ -7,6 +7,7 @@ import com.sortir.sortir.entity.Etat;
 import com.sortir.sortir.entity.Lieu;
 import com.sortir.sortir.entity.Participant;
 import com.sortir.sortir.repository.LieuRepository;
+import com.sortir.sortir.repository.ParticipantRepository;
 import com.sortir.sortir.repository.VilleRepository;
 import com.sortir.sortir.service.SortieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,11 +37,16 @@ public class SortieController {
     @Autowired
     VilleRepository villeRepository;
 
+
+    @Autowired
+    ParticipantRepository participantRepository;
+
     @GetMapping("/sortie/add/")
-    public String add(Model model) {
+    public String add(Principal principal, Model model) {
 
         SortieAddRoute route = new SortieAddRoute();
         model.addAttribute("route", route);
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         model.addAttribute("sorties", sortieService.findAll());
         model.addAttribute("villes", villeRepository.findAll());
@@ -49,7 +56,7 @@ public class SortieController {
     }
 
     @PostMapping("/sortie/add/")
-    public RedirectView addValidation(@RequestParam("nom") String nom,
+    public RedirectView addValidation(Principal principal,@RequestParam("nom") String nom,
                                       @RequestParam("date") String date,
                                       @RequestParam("duree") Integer duree,
                                       @RequestParam("limite") String limite,
@@ -61,6 +68,7 @@ public class SortieController {
 
         HomeRoute route = new HomeRoute();
         model.addAttribute("route", route);
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         Integer etatPublication;
 
@@ -79,13 +87,14 @@ public class SortieController {
     }
 
     @GetMapping("/sortie/edit/{id}/")
-    public String edit(@PathVariable Integer id, Model model) {
+    public String edit(Principal principal,@PathVariable Integer id, Model model) {
 
         SortieEditRoute route = new SortieEditRoute();
         model.addAttribute("route", route);
 
 
         model.addAttribute("sortie", sortieService.findById(id).get());
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         model.addAttribute("villes", villeRepository.findAll());
         model.addAttribute("lieux", lieuRepository.findAll());
@@ -94,7 +103,7 @@ public class SortieController {
     }
 
     @PostMapping("/sortie/edit/{id}/")
-    public String editValidation(@PathVariable Integer id, @RequestParam("nom") String nom,
+    public String editValidation(Principal principal,@PathVariable Integer id, @RequestParam("nom") String nom,
                                  @RequestParam("date") String date,
                                  @RequestParam("duree") Integer duree,
                                  @RequestParam("limite") String limite,
@@ -121,6 +130,7 @@ public class SortieController {
         sortieService.edit(id, nom, date1, duree, date2, nbMax, infos, 1, lieu, etatPublication);
 
         model.addAttribute("sortie", sortieService.findById(id).get());
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         model.addAttribute("villes", villeRepository.findAll());
         model.addAttribute("lieux", lieuRepository.findAll());
@@ -129,10 +139,11 @@ public class SortieController {
     }
 
     @GetMapping("/sortie/delete/{id}/")
-    public String delete(@PathVariable Integer id, Model model) {
+    public String delete(Principal principal,@PathVariable Integer id, Model model) {
 
         HomeRoute route = new HomeRoute();
         model.addAttribute("route",route);
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         sortieService.delete(id);
 

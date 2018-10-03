@@ -1,6 +1,8 @@
 package com.sortir.sortir.controller;
 
 import com.sortir.sortir.controller.route.HomeRoute;
+import com.sortir.sortir.controller.route.ProfilRoute;
+import com.sortir.sortir.repository.ParticipantRepository;
 import com.sortir.sortir.service.SortieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ public class HomeController {
     @Autowired
     SortieService sortieService;
 
+    @Autowired
+    ParticipantRepository participantRepository;
+
     @GetMapping("/")
     public String getHome(Model model, Principal principal){
 
@@ -22,7 +27,18 @@ public class HomeController {
         model.addAttribute("route",route);
 
         model.addAttribute("sorties", sortieService.findAll());
-        model.addAttribute("user", principal.getName());
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
+
+        return route.getTemplate();
+    }
+
+    @GetMapping("/profil/")
+    public String getProfil(Model model, Principal principal){
+
+        ProfilRoute route = new ProfilRoute();
+        model.addAttribute("route",route);
+
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         return route.getTemplate();
     }
