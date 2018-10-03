@@ -24,7 +24,7 @@
                          <select class="form-control" id="site" name="site">
                              <option value="0">CHOISIR</option>
                          <#list sites as site>
-                             <option value="${site.id}">${site.libelle}</option>
+                             <option value="${site.id}">${site.ville}</option>
                          </#list>
                         </select>
                     </div>
@@ -63,29 +63,29 @@
             <div style="flex:2">
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="publier" name="organisateur">
-                        <label class="form-check-label" for="publier" >
+                    <input class="form-check-input" type="checkbox" id="organisateur" name="organisateur">
+                        <label class="form-check-label" for="organisateur" >
                         Sorties dont je suis l'organisateur/trice
                         </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="publier" name="inscrit">
-                    <label class="form-check-label" for="publier" >
+                    <input class="form-check-input" type="checkbox" id="inscrit" name="inscrit">
+                    <label class="form-check-label" for="inscrit" >
                         Sorties auxquelles je suis inscrit/e
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="publier" name="noninscrit">
-                        <label class="form-check-label" for="publier" >
+                    <input class="form-check-input" type="checkbox" id="noninscrit" name="noninscrit">
+                        <label class="form-check-label" for="noninscrit" >
                         Sorties auxquelles je ne suis pas inscrit/e
                         </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="publier" name="passees">
-                    <label class="form-check-label" for="publier" >
+                    <input class="form-check-input" type="checkbox" id="passees" name="passees">
+                    <label class="form-check-label" for="passees" >
                         Sorties passées
                     </label>
                 </div>
