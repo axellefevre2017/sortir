@@ -6,7 +6,7 @@
 </head>
 <body>
 <#include "menu.ftlh">
-
+<h3>Bienvenue ${user} !</h3>
 
 <div style="margin-left:15px;margin-top:20px;margin-bottom: 15px;">
     <h2 style="display:inline;">Filtrer les sorties</h2>
