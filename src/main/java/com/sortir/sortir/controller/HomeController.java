@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class HomeController {
 
@@ -14,21 +16,17 @@ public class HomeController {
     SortieService sortieService;
 
     @GetMapping("/")
-    public String getHome(Model model){
+    public String getHome(Model model, Principal principal){
 
         HomeRoute route = new HomeRoute();
         model.addAttribute("route",route);
 
         model.addAttribute("sorties", sortieService.findAll());
+        model.addAttribute("user", principal.getName());
 
         return route.getTemplate();
     }
 
-    @GetMapping("/login")
-    public String getLogin(){
-
-        return "login";
-    }
 
 
 }

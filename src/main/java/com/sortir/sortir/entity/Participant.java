@@ -22,8 +22,10 @@ public class Participant {
     public Participant() {
     }
 
-    public Participant(Integer id, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif) {
+    public Participant(Integer id, String pseudo, String password, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif) {
         this.id = id;
+        this.pseudo = pseudo;
+        this.password = password;
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
@@ -86,5 +88,21 @@ public class Participant {
 
     public void setActif(Boolean actif) {
         this.actif = actif;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -3,29 +3,22 @@
     <#include "import.ftlh">
 </head>
 <body>
-<form class="form-horizontal" action="/action_page.php">
+<form class="form-horizontal" name="f" method="post" action="login">
     <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Email:</label>
+        <label class="control-label col-sm-2" for="username">PSEUDO :</label>
         <div class="col-lg-3">
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <input type="text" class="form-control" name="username" id="username" placeholder="Pseudo">
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-2" for="pwd">Password:</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label><input type="checkbox"> Remember me</label>
-            </div>
+        <label class="control-label col-sm-2" for="password">MOT DE PASSE :</label>
+        <div class="col-lg-3">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe">
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">SE CONNECTER</button>
         </div>
     </div>
 </form>

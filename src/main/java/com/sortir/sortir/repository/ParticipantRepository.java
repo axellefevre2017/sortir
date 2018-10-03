@@ -14,4 +14,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
     List<Participant> findAll();
 
     Optional<Participant> findById(Integer id);
+
+    Participant findByPseudo(String pseudo);
 }
