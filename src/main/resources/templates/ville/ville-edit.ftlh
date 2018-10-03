@@ -9,6 +9,7 @@
 
 <div class="container">
     <form action="/ville/edit/${ville.id}/" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group">
             <label for="ville">Ville</label>
             <input type="text" class="form-control" id="ville" name="ville" <#if ville??>value="${ville.ville}"</#if>>

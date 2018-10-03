@@ -14,6 +14,7 @@
         <span href="/site/" class="badge badge-pill badge-primary"><strong>Filtre : </strong> ${filtre}</span>
         </#if>
         <div class="form-group">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="text" class="form-control" id="site" placeholder="Le nom contient..." name="site">
         </div>
         <button type="submit" class="btn btn-primary">RECHERCHER</button>
@@ -42,6 +43,7 @@
                         <div class="form-group">
                             <label for="site">Site</label>
                             <input type="text" class="form-control" id="site" name="site">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </div>
                     </th>
                     <th colspan="2">
