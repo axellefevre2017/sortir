@@ -8,6 +8,7 @@
 <#include "../breadcrumb.ftlh">
 
 <div class="container">
+    <#if user.administrateur == true>
     <form action="/site/edit/${site.id}/" method="post">
         <div class="form-group">
             <label for="site">Site</label>
@@ -17,6 +18,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
+    </#if>
 </div>
 
 

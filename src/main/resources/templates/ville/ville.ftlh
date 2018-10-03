@@ -8,22 +8,26 @@
 <#include "../breadcrumb.ftlh">
 
 <div class="container">
+    <#if user.administrateur == true>
     <h3>Filtrer les villes</h3>
 
 
     <div class="col-lg-12">
         <#if filtre??>
-            <span href="/ville/" class="badge badge-pill badge-secondary" style="margin-right: 15px;"><strong>Filtre : </strong> ${filtre} <i class="fa fa-times-circle fa-1x" onClick="window.location.href = '/ville/'" style="cursor: pointer;"></i></span>
+            <span href="/ville/" class="badge badge-pill badge-secondary"
+                  style="margin-right: 15px;"><strong>Filtre : </strong> ${filtre} <i class="fa fa-times-circle fa-1x"
+                                                                                      onClick="window.location.href = '/ville/'"
+                                                                                      style="cursor: pointer;"></i></span>
         </#if>
 
-    <form action="/ville/rechercher/" method="post" class="form-inline">
+        <form action="/ville/rechercher/" method="post" class="form-inline">
 
-        <div class="form-group" style="margin-right: 15px;margin-top: 5px;">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="text" class="form-control" id="ville" placeholder="Le nom contient..." name="ville">
-        </div>
-        <button type="submit" class="btn btn-primary">RECHERCHER</button>
-    </form>
+            <div class="form-group" style="margin-right: 15px;margin-top: 5px;">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="text" class="form-control" id="ville" placeholder="Le nom contient..." name="ville">
+            </div>
+            <button type="submit" class="btn btn-primary">RECHERCHER</button>
+        </form>
     </div>
 
     <div class="col-lg-12">
@@ -81,7 +85,7 @@
             </form>
         </table>
     </div>
-
+    </#if>
 </div>
 
 
