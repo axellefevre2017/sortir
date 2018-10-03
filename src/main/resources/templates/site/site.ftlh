@@ -8,17 +8,26 @@
 <#include "../breadcrumb.ftlh">
 
 <div class="container">
-    <form action="/site/rechercher/" method="post">
-        <h3>Filtrer les sites</h3>
+    <h3>Filtrer les sites</h3>
+
+    <div class="col-lg-12">
+
         <#if filtre??>
-        <span href="/site/" class="badge badge-pill badge-primary"><strong>Filtre : </strong> ${filtre}</span>
+        <span href="/site/" class="badge badge-pill badge-primary"><strong>Filtre : </strong> ${filtre} <i class="fa fa-times-circle fa-1x" onClick="window.location.href = '/site/'" style="cursor: pointer;"></i></span>
         </#if>
+
+        <form action="/site/rechercher/" method="post" class="form-inline">
+
         <div class="form-group">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="text" class="form-control" id="site" placeholder="Le nom contient..." name="site">
         </div>
+
         <button type="submit" class="btn btn-primary">RECHERCHER</button>
-    </form>
+        </form>
+    </div>
+
+
     <div class="col-lg-12"
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -26,14 +35,23 @@
             <tr>
                 <th>Site</th>
                 <th></th>
-                <th></th>
+
             </tr>
             </thead>
     <#list sites as site>
     <tr>
         <td>${site.libelle}</td>
-        <td>MODIFIER</td>
-        <td>SUPPRIMER</td>
+        <td>
+
+            <div style="display:flex;text-align: center;">
+                <div style="flex:1">
+                    <a href="/site/edit/${site.id}/"><i class="fas fa-edit"></i></a>
+                </div>
+                <div style="flex:1">
+                    <a href="/site/delete/${site.id}/"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </td>
     </tr>
     </#list>
             <tfoot>
@@ -46,7 +64,7 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </div>
                     </th>
-                    <th colspan="2">
+                    <th>
                         <button type="submit" class="btn btn-primary">Ajouter</button>
                     </th>
                 </tr>

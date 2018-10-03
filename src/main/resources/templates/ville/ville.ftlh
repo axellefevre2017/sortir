@@ -51,6 +51,7 @@
                     <a href="/ville/delete/${ville.id}/"><i class="fas fa-trash-alt"></i></a>
                 </div>
             </div>
+        </td>
 
     </tr>
     </#list>
