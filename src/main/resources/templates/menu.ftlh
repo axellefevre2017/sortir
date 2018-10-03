@@ -10,12 +10,14 @@
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
+            <#if user.administrateur == true>
             <li class="nav-item <#if route.getMenu()=='ville'>active</#if>">
                 <a class="nav-link waves-effect waves-light" href="/ville/">VILLES</a>
             </li>
             <li class="nav-item <#if route.getMenu()=='site'>active</#if>">
                 <a class="nav-link waves-effect waves-light" href="/site/">SITES</a>
             </li>
+            </#if>
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
                 <span class="navbar-text white-text" style="margin-top:7px">

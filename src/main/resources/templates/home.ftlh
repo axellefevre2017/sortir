@@ -120,12 +120,12 @@
                 <tbody>
                     <tr>
                         <td class="hidden-xs-down"><#if sortie.nom??>${sortie.nom}</#if></td>
-                        <td><#if sortie.dateDebut??>${sortie.dateDebut}</#if></td>
-                        <td class="d-none d-lg-table-cell"><#if sortie.dateLimiteInscription??>${sortie.dateLimiteInscription}</#if></td>
-                        <td class=""><#if sortie.nbInscriptionsMax??>à faire/${sortie.nbInscriptionsMax}</#if></td>
+                        <td><#if sortie.date??>${sortie.date}</#if></td>
+                        <td class="d-none d-lg-table-cell"><#if sortie.cloture??>${sortie.cloture}</#if></td>
+                        <td class=""><#if sortie.nb??>${sortie.nb}/${sortie.max}</#if></td>
                         <td><#if sortie.etat??>${sortie.etat.libelle}</#if></td>
-                        <td>à faire</td>
-                        <td><#if sortie.organisateur??>${sortie.organisateur.nom + ' ' + sortie.organisateur.prenom}</#if></td>
+                        <td><#if sortie.inscrit == true>X<#else></#if></td>
+                        <td><#if sortie.participant??>${sortie.participant.nom + ' ' + sortie.participant.prenom}</#if></td>
                         <td>
                             <div style="display:flex;text-align: center;">
                                 <div style="flex:1">

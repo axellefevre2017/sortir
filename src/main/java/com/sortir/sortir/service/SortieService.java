@@ -1,16 +1,12 @@
 package com.sortir.sortir.service;
 
-import com.sortir.sortir.entity.Etat;
-import com.sortir.sortir.entity.Lieu;
-import com.sortir.sortir.entity.Participant;
-import com.sortir.sortir.entity.Sortie;
-import com.sortir.sortir.repository.EtatRepository;
-import com.sortir.sortir.repository.LieuRepository;
-import com.sortir.sortir.repository.ParticipantRepository;
-import com.sortir.sortir.repository.SortieRepository;
+import com.sortir.sortir.controller.dto.SortieDto;
+import com.sortir.sortir.entity.*;
+import com.sortir.sortir.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +21,46 @@ public class SortieService {
     EtatRepository etatRepository;
 
     @Autowired
+    InscriptionRepository inscriptionRepository;
+
+    @Autowired
     ParticipantRepository participantRepository;
 
     @Autowired
     LieuRepository lieuRepository;
 
-    public List<Sortie> findAll(){
+
+    public List<SortieDto> findAll(){
+
+        List<SortieDto> sortieDtos = new ArrayList<>();
 
 
-        return sortieRepository.findAll();
+        for(int i=0;i<sortieRepository.findAll().size();i++){
+
+            SortieDto sortieDto = new SortieDto();
+            sortieDto.setId(sortieRepository.findAll().get(i).getId());
+            sortieDto.setNom(sortieRepository.findAll().get(i).getNom());
+            sortieDto.setDate(sortieRepository.findAll().get(i).getDateDebut());
+            sortieDto.setCloture(sortieRepository.findAll().get(i).getDateLimiteInscription());
+            sortieDto.setMax(sortieRepository.findAll().get(i).getNbInscriptionsMax());
+            sortieDto.setParticipant(sortieRepository.findAll().get(i).getOrganisateur());
+            sortieDto.setEtat(sortieRepository.findAll().get(i).getEtat());
+            sortieDto.setParticipant(sortieRepository.findAll().get(i).getOrganisateur());
+
+            if(inscriptionRepository.countBySortieAndParticipant(sortieRepository.findAll().get(i).getId(),sortieRepository.findAll().get(i).getOrganisateur().getId())==0){
+                sortieDto.setInscrit(false);
+            }else{
+                sortieDto.setInscrit(true);
+            }
+
+            sortieDto.setNb(inscriptionRepository.countBySortie(sortieRepository.findAll().get(i).getId()));
+
+            sortieDtos.add(sortieDto);
+
+        }
+
+
+        return sortieDtos;
     }
 
     public Sortie add(String nom, Date date, Integer duree, Date limite, Integer nbMax, String infos, Integer organisateur, Integer lieu, Integer etat){
@@ -91,5 +118,11 @@ public class SortieService {
 
         return sortieRepository.findById(id);
     }
+
+    /*public List<Sortie> filter(Site site, String nom, Date debut, Date fin, Boolean organisateur,Boolean inscrit, Boolean noninscrit, Boolean passe){
+
+
+        return sortieRepository.
+    }*/
 
 }
