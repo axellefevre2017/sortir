@@ -86,7 +86,7 @@ public class SortieService {
         for (int i = 0; i < dtoList.size(); i++) {
 
 
-            if (site != 0 && site != dtoList.get(i).getLieu().getId()) {
+            if (site != 0 && site != dtoList.get(i).getLieu().getVille().getId()) {
                 toRemove.add(dtoList.get(i));
             }
             if (organisateur != null && dtoList.get(i).getParticipant().getId() != participant.getId()) {

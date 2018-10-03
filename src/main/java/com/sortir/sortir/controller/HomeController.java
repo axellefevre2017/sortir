@@ -5,6 +5,7 @@ import com.sortir.sortir.controller.route.ProfilRoute;
 import com.sortir.sortir.repository.LieuRepository;
 import com.sortir.sortir.repository.ParticipantRepository;
 import com.sortir.sortir.repository.SiteRepository;
+import com.sortir.sortir.repository.VilleRepository;
 import com.sortir.sortir.service.SortieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -27,7 +28,7 @@ public class HomeController {
     ParticipantRepository participantRepository;
 
     @Autowired
-    SiteRepository siteRepository;
+    VilleRepository villeRepository;
 
     @Autowired
     LieuRepository lieuRepository;
@@ -38,7 +39,7 @@ public class HomeController {
         HomeRoute route = new HomeRoute();
         model.addAttribute("route", route);
 
-        model.addAttribute("sites", lieuRepository.findAll());
+        model.addAttribute("sites", villeRepository.findAll());
         model.addAttribute("sorties", sortieService.findAll());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
@@ -59,7 +60,7 @@ public class HomeController {
         HomeRoute route = new HomeRoute();
         model.addAttribute("route", route);
 
-        model.addAttribute("sites", siteRepository.findAll());
+        model.addAttribute("sites", villeRepository.findAll());
         model.addAttribute("sorties", sortieService.filter(participantRepository.findByPseudo(principal.getName()),site, name_sortie, date_debut, date_fin, organisateur, inscrit, noninscrit, passees));
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
