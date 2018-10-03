@@ -1,4 +1,4 @@
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark purple lighten-1">
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark blue lighten-1">
     <a class="navbar-brand" href="javascript:;;">SORTIR.COM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-5" aria-controls="navbarSupportedContent-5" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,9 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
+                <span class="navbar-text white-text" style="margin-top:7px">
+                ${user.prenom + ' ' + user.nom}
+                </span>
             <li class="nav-item avatar dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <img style="height:35px;" src="${user.photo}" class="img-fluid rounded-circle z-depth-0">

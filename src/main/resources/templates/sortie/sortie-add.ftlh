@@ -44,6 +44,7 @@
         </div>
         <div class="form-group">
             <label for="lieu">Lieu</label>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <select class="form-control" id="lieu" name="lieu">
                 <#list lieux as lieu>
                     <option value="${lieu.id}"  <#if sortie?? && sortie.lieu.id==lieu.id>selected</#if>>${lieu.libelle}</option>

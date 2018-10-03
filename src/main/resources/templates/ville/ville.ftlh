@@ -19,6 +19,7 @@
     <form action="/ville/rechercher/" method="post" class="form-inline">
 
         <div class="form-group" style="margin-right: 15px;margin-top: 5px;">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="text" class="form-control" id="ville" placeholder="Le nom contient..." name="ville">
         </div>
         <button type="submit" class="btn btn-primary">RECHERCHER</button>
@@ -66,6 +67,7 @@
                         <div class="form-group">
                             <label for="codePostal">Code Postal</label>
                             <input type="text" class="form-control" id="codePostal" name="codePostal">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </div>
                     </th>
                     <th>

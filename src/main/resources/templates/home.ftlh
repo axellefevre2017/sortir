@@ -6,23 +6,25 @@
 </head>
 <body>
 <#include "menu.ftlh">
-<h3>Bienvenue ${user.prenom + ' ' + user.nom} !</h3>
 
 <div style="margin-left:15px;margin-top:20px;margin-bottom: 15px;">
-    <h2 style="display:inline;">Filtrer les sorties</h2>
+    <h4 style="display:inline;">Filtrer les sorties</h4>
     <i class="fas fa-angle-down fa-2x" data-toggle="collapse" data-target="#demo" style="display:inline; position :relative;top : 5px;"></i>
 </div>
 
 <div id="demo" class="collapse">
     <form method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div style="display:flex;text-align:left;">
 
             <div style="flex:1">
                 <div class="col-lg-10">
                      <div class="form-group">
                         <label for="ville">Site :</label>
-                        <select class="form-control" id="site">
-
+                         <select class="form-control" id="site">
+                         <#list sites as site>
+                             <option value="${site.id}">${site.libelle}</option>
+                         </#list>
                         </select>
                     </div>
                 </div>
