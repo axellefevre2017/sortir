@@ -1,8 +1,6 @@
 package com.sortir.sortir.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "participants")
 public class Participant {
@@ -20,10 +18,14 @@ public class Participant {
     private Boolean actif;
     private String photo;
 
+    @JoinColumn(name="villes_no_ville")
+    @ManyToOne
+    private Ville ville;
+
     public Participant() {
     }
 
-    public Participant(Integer id, String pseudo, String password, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif, String photo) {
+    public Participant(Integer id, String pseudo, String password, String nom, String prenom, String telephone, String mail, Boolean administrateur, Boolean actif, String photo, Ville ville) {
         this.id = id;
         this.pseudo = pseudo;
         this.password = password;
@@ -34,6 +36,7 @@ public class Participant {
         this.administrateur = administrateur;
         this.actif = actif;
         this.photo = photo;
+        this.ville = ville;
     }
 
     public Integer getId() {
@@ -114,5 +117,13 @@ public class Participant {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Ville getVille() {
+        return ville;
+    }
+
+    public void setVille(Ville ville) {
+        this.ville = ville;
     }
 }
