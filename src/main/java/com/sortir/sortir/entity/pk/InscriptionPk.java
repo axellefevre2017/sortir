@@ -23,5 +23,36 @@ public class InscriptionPk implements Serializable {
     @ManyToOne
     private Participant participant;
 
+    public InscriptionPk(Date dateInscription, Sortie sortie, Participant participant) {
+        this.dateInscription = dateInscription;
+        this.sortie = sortie;
+        this.participant = participant;
+    }
 
+    public InscriptionPk() {
+    }
+
+    public Date getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
+    }
+
+    public Sortie getSortie() {
+        return sortie;
+    }
+
+    public void setSortie(Sortie sortie) {
+        this.sortie = sortie;
+    }
+
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
+    }
 }

@@ -110,7 +110,7 @@
                         <th class="hidden-xs-down">Nom de la sortie</th>
                         <th>Date de la sortie</th>
                         <th class="d-none d-lg-table-cell">Clôture</th>
-                        <th class="">inscrits/places</th>
+                        <th class="">Inscrits/Places</th>
                         <th>Etat</th>
                         <th>Inscrit</th>
                         <th>Organisateur</th>
@@ -142,6 +142,7 @@
                 </tbody>
                 </#list>
             </table>
+            <a href="/sortie/add/" class="btn btn-primary">Ajouter</a>
         </div>
     </div>
 

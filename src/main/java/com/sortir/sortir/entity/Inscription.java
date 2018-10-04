@@ -11,4 +11,18 @@ public class Inscription {
         @EmbeddedId
         private InscriptionPk id;
 
+        public Inscription(InscriptionPk id) {
+                this.id = id;
+        }
+
+        public Inscription() {
+        }
+
+        public InscriptionPk getId() {
+                return id;
+        }
+
+        public void setId(InscriptionPk id) {
+                this.id = id;
+        }
 }

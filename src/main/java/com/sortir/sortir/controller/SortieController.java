@@ -3,9 +3,11 @@ package com.sortir.sortir.controller;
 import com.sortir.sortir.controller.route.HomeRoute;
 import com.sortir.sortir.controller.route.sortie.SortieAddRoute;
 import com.sortir.sortir.controller.route.sortie.SortieEditRoute;
+import com.sortir.sortir.controller.route.sortie.SortieShowRoute;
 import com.sortir.sortir.entity.Etat;
 import com.sortir.sortir.entity.Lieu;
 import com.sortir.sortir.entity.Participant;
+import com.sortir.sortir.repository.InscriptionRepository;
 import com.sortir.sortir.repository.LieuRepository;
 import com.sortir.sortir.repository.ParticipantRepository;
 import com.sortir.sortir.repository.VilleRepository;
@@ -36,6 +38,9 @@ public class SortieController {
 
     @Autowired
     VilleRepository villeRepository;
+
+    @Autowired
+    InscriptionRepository inscriptionRepository;
 
 
     @Autowired
@@ -148,6 +153,20 @@ public class SortieController {
         sortieService.delete(id);
 
         model.addAttribute("sorties", sortieService.findAll());
+
+        return route.getTemplate();
+    }
+
+    @GetMapping("/sortie/show/{id}/")
+    public String show(Principal principal,@PathVariable Integer id, Model model) {
+
+        SortieShowRoute route = new SortieShowRoute();
+        model.addAttribute("route", route);
+
+
+        model.addAttribute("sortie", sortieService.findById(id).get());
+        model.addAttribute("participants", inscriptionRepository.findAllBySortie(id));
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         return route.getTemplate();
     }
