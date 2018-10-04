@@ -73,6 +73,7 @@ public class HomeController {
         ProfilRoute route = new ProfilRoute();
         model.addAttribute("route", route);
 
+        model.addAttribute("villes",villeRepository.findAll());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         return route.getTemplate();

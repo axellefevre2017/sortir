@@ -11,7 +11,7 @@
     <div class="card" style="width: 35rem;margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;">
         <div style="height:120px;background-color: #1fc8db;background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
 
-            <img style="height:200px;width:200px;" class="card-img-top rounded-circle" src="${user.photo}"
+            <img style="height:200px;width:200px;margin-top:10px;" class="card-img-top rounded-circle" src="${user.photo}"
                  alt="Card image cap">
         </div>
 
@@ -28,31 +28,31 @@
 
                 <div class="form-group">
                     <label for="pseudo">Pseudo :</label>
-                    <input type="text" class="form-control" id="pseudo" name="pseudo">
+                    <input type="text" class="form-control" id="pseudo" name="pseudo" value="${user.pseudo}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="prenom">Prénom :</label>
-                    <input type="text" class="form-control" id="prenom" name="prenom">
+                    <input type="text" class="form-control" id="prenom" name="prenom" value="${user.prenom}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="nom">Nom :</label>
-                    <input type="text" class="form-control" id="nom" name="nom">
+                    <input type="text" class="form-control" id="nom" name="nom" value="${user.nom}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="telephone">Télephone :</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone">
+                    <input type="text" class="form-control" id="telephone" name="telephone" value="${user.telephone}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="email">Email :</label>
-                    <input type="text" class="form-control" id="email" name="email">
+                    <input type="text" class="form-control" id="email" name="email" value="${user.mail}">
                 </div>
 
 
@@ -71,8 +71,8 @@
                 <div class="form-group">
                     <label for="ville">Ville de ratachement :</label>
                     <select class="form-control" id="ville" name="ville">
-                     <#list sites as site>
-                        <option value="${site.id}">${site.libelle}</option>
+                     <#list villes as ville>
+                        <option value="${ville.id}" <#if ville.id== user.lieu.ville.id>selected</#if>>${ville.ville}</option>
                     </#list>
                     </select>
                 </div>

@@ -49,10 +49,10 @@
 
             <div style="display:flex;text-align: center;">
                 <div style="flex:1">
-                    <a href="/ville/edit/${ville.id}/"><i class="fas fa-edit"></i></a>
+                    <a href="/ville/edit/${ville.id}/"><i class="fas fa-edit" style="color:#007bff;"></i></a>
                 </div>
                 <div style="flex:1">
-                    <a href="/ville/delete/${ville.id}/"><i class="fas fa-trash-alt"></i></a>
+                    <a href="/ville/delete/${ville.id}/"><i class="fas fa-trash-alt" style="color:red;"></i></a>
                 </div>
             </div>
         </td>

@@ -123,17 +123,17 @@
                         <td class="hidden-xs-down"><#if sortie.nom??>${sortie.nom}</#if></td>
                         <td><#if sortie.date??>${sortie.date}</#if></td>
                         <td class="d-none d-lg-table-cell"><#if sortie.cloture??>${sortie.cloture}</#if></td>
-                        <td class=""><#if sortie.nb??>${sortie.nb}/${sortie.max}</#if></td>
+                        <td  style="text-align: center;"><#if sortie.nb??>${sortie.nb}/${sortie.max}</#if></td>
                         <td><#if sortie.etat??>${sortie.etat.libelle}</#if></td>
-                        <td><#if sortie.inscrit == true>X<#else></#if></td>
+                        <td style="text-align: center;"><#if sortie.inscrit == true><i class="fas fa-check" style="color:green;"></i><#else></#if></td>
                         <td><#if sortie.participant??>${sortie.participant.nom + ' ' + sortie.participant.prenom}</#if></td>
                         <td>
                             <div style="display:flex;text-align: center;">
                                 <div style="flex:1">
-                                    <a href="/sortie/edit/${sortie.id}/"><i class="fas fa-edit"></i></a>
+                                    <a href="/sortie/edit/${sortie.id}/"><i class="fas fa-edit"  style="color:#007bff;"></i></a>
                                 </div>
                                 <div style="flex:1">
-                                    <a href="/sortie/delete/${sortie.id}/"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="/sortie/delete/${sortie.id}/"><i class="fas fa-trash-alt"  style="color:red;"></i></a>
                                 </div>
                             </div>
 

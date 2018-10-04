@@ -47,10 +47,10 @@
 
             <div style="display:flex;text-align: center;">
                 <div style="flex:1">
-                    <a href="/site/edit/${site.id}/"><i class="fas fa-edit"></i></a>
+                    <a href="/site/edit/${site.id}/"><i class="fas fa-edit" style="color:#007bff;"></i></a>
                 </div>
                 <div style="flex:1">
-                    <a href="/site/delete/${site.id}/"><i class="fas fa-trash-alt"></i></a>
+                    <a href="/site/delete/${site.id}/"><i class="fas fa-trash-alt" style="color:red;"></i></a>
                 </div>
             </div>
         </td>
