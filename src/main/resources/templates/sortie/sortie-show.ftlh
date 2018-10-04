@@ -53,8 +53,8 @@
             <#if sortie.lieu.libelle??>${sortie.lieu.libelle}</#if></br>
             <#if sortie.lieu.rue??>${sortie.lieu.rue}</#if></br>
             <#if sortie.lieu.ville.codePostal??>${sortie.lieu.ville.codePostal}</#if></br>
-            <#if sortie.latitude??>${sortie.latitude}</#if></br>
-            <#if sortie.longitude??>${sortie.longitude}</#if></br>
+            <#if sortie.lieu.latitude??>${sortie.lieu.latitude?string["0.######"]}</#if></br>
+            <#if sortie.lieu.longitude??>${sortie.lieu.longitude?string["0.######"]}</#if></br>
                 </div>
 
 
