@@ -99,11 +99,11 @@
         </div>
     </form>
 </div>
-
+<button onclick="window.location.href = '/profile/">Click me</button>
 </div>
 
     <div class="col-lg-12" style="margin-top:30px;">
-        <div class="table-responsive">
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -143,7 +143,7 @@
                 </#list>
             </table>
             <a href="/sortie/add/" class="btn btn-primary">Ajouter</a>
-        </div>
+
     </div>
 
 

@@ -31,7 +31,6 @@
     </div>
 
     <div class="col-lg-12">
-    <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -62,29 +61,45 @@
             <tfoot>
             <form action="/ville/" method="post">
                 <tr>
-                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
+                    <th>
 
-                            <label for="ville">Ville</label>
-                            <input type="text" class="form-control" id="ville" name="ville">
+
+                            <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville">
 
                     </th>
-                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
+                    <th>
 
-                            <label for="codePostal">Code Postal</label>
-                            <input type="text" class="form-control" id="codePostal" name="codePostal">
+
+                            <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code postal">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                     </th>
-                    <th style="height: 140px; width: 85px;padding-bottom:0px;">
 
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
 
+
+
+
+
+                    <th style="padding-left: 0px;padding-right: 0px;">
+                        <div style="display:flex;text-align: center;">
+                             <div style="flex:1">
+                                <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
+                            </div>
+                        </div>
                     </th>
+
+
+
+
+
+
+
+
                 </tr>
             </tfoot>
             </form>
         </table>
-    </div>
+
     </#if>
 </div>
 

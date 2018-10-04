@@ -60,15 +60,35 @@
                 <form action="/site/" method="post">
                     <tr>
                         <th>
-                            <div class="form-group">
-                                <label for="site">Site</label>
-                                <input type="text" class="form-control" id="site" name="site">
+
+                                <input type="text" class="form-control" id="site" name="site" placeholder="Site">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        </th>
+
+
+
+
+
+
+                        <th style="padding-left: 0px;padding-right: 0px;width:100px;">
+                            <div style="display:flex;text-align: center;">
+
+                                <div style="flex:1">
+                            <button type="submit" class="btn btn-primary btn-sm" style="">Ajouter</button>
+                                </div>
+
                             </div>
                         </th>
-                        <th>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
-                        </th>
+
+
+
+
+
+
+
+
+
                     </tr>
                 </tfoot>
                 </form>
