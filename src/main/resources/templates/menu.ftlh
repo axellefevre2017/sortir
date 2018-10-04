@@ -36,6 +36,7 @@
     </div>
 </nav>
 
+<#include "breadcrumb.ftlh">
 
 <#if errors?? >
     <div class="col-offset-2 col-lg-10 alert alert-danger" style="margin:0 auto;margin-top:10px;margin-bottom:10px;">

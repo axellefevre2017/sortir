@@ -5,7 +5,6 @@
 </head>
 <body>
 <#include "../menu.ftlh">
-<#include "../breadcrumb.ftlh">
 
 <div class="container">
 
