@@ -6,7 +6,6 @@
 </head>
 <body>
 <#include "menu.ftlh">
-
 <center>
     <div class="card" style="width: 35rem;margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;">
         <div style="height:120px;background-color: #1fc8db;background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
@@ -46,13 +45,13 @@
 
                 <div class="form-group">
                     <label for="telephone">Télephone :</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone" value="${user.telephone}">
+                    <input type="text" pattern= "[0-9]+" class="form-control" id="telephone" name="telephone" value="${user.telephone}" maxlength="10">
                 </div>
 
 
                 <div class="form-group">
                     <label for="email">Email :</label>
-                    <input type="text" class="form-control" id="email" name="email" value="${user.mail}">
+                    <input type="email" class="form-control" id="email" name="mail" value="${user.mail}">
                 </div>
 
 
@@ -64,7 +63,7 @@
 
                 <div class="form-group">
                     <label for="confirmation_password">Confirmation</label>
-                    <input type="password" class="form-control" id="confirmation_password" name="confirmation_password">
+                    <input type="password" class="form-control" id="confirmation_password" name="confirmPassword">
                 </div>
 
 
@@ -72,7 +71,7 @@
                     <label for="ville">Ville de ratachement :</label>
                     <select class="form-control" id="ville" name="ville">
                      <#list villes as ville>
-                        <option value="${ville.id}" <#if ville.id== user.lieu.ville.id>selected</#if>>${ville.ville}</option>
+                        <option value="${ville.id}" <#if ville.id== user.ville.id>selected</#if>>${ville.ville}</option>
                     </#list>
                     </select>
                 </div>
@@ -97,7 +96,8 @@
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
         </div>
-
+        <input type="hidden" class="form-control" id="pseudo" name="id" value="${user.id}">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
 

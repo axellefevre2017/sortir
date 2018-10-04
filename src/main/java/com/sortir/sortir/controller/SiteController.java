@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class SiteController {
@@ -36,6 +38,9 @@ public class SiteController {
 
     @Autowired
     ParticipantRepository participantRepository;
+
+
+    List<String> errors = new ArrayList<>();
 
     @GetMapping("/site/")
     public String add(Principal principal, Model model){
