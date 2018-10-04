@@ -35,13 +35,22 @@
                 <thead>
                 <tr>
                     <th>Site</th>
+                    <th>Rue</th>
+                    <th>Ville</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                     <th></th>
 
                 </tr>
                 </thead>
+                <tbody>
     <#list sites as site>
     <tr>
         <td>${site.libelle}</td>
+        <td>${site.rue}</td>
+        <td>${site.ville.ville}</td>
+        <td>${site.latitude?string["0.######"]}</td>
+        <td>${site.longitude?string["0.######"]}</td>
         <td>
 
             <div style="display:flex;text-align: center;">
@@ -55,37 +64,45 @@
         </td>
     </tr>
     </#list>
+                </tbody>
                 <tfoot>
                 <form action="/site/" method="post">
                     <tr>
                         <th>
 
-                                <input type="text" class="form-control" id="site" name="site" placeholder="Site">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="text" class="form-control" id="site" name="site" placeholder="Site">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                         </th>
-
-
-
-
+                        <th>
+                            <input type="text" class="form-control" id="rue" name="rue" placeholder="Rue">
+                        </th>
+                        <th>
+                            <select class="form-control" id="ville" name="ville">
+                                <#list villes as ville>
+                                    <option value="${ville.id}">${ville.ville}</option>
+                                </#list>
+                            </select>
+                        </th>
+                        <th>
+                            <input type="text" class="form-control" id="latitude" name="latitude"
+                                   placeholder="Latitude">
+                        </th>
+                        <th>
+                            <input type="text" class="form-control" id="longitude" name="longitude"
+                                   placeholder="Longitude">
+                        </th>
 
 
                         <th style="padding-left: 0px;padding-right: 0px;width:100px;">
                             <div style="display:flex;text-align: center;">
 
                                 <div style="flex:1">
-                            <button type="submit" class="btn btn-primary btn-sm" style="">Ajouter</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" style="">Ajouter</button>
                                 </div>
 
                             </div>
                         </th>
-
-
-
-
-
-
-
 
 
                     </tr>

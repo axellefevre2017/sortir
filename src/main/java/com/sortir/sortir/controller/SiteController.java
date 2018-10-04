@@ -1,9 +1,11 @@
 package com.sortir.sortir.controller;
 
+import com.sortir.sortir.controller.dto.SortieDto;
 import com.sortir.sortir.controller.route.site.SiteEditRoute;
 import com.sortir.sortir.controller.route.site.SiteRoute;
 import com.sortir.sortir.controller.route.ville.VilleEditRoute;
 import com.sortir.sortir.controller.route.ville.VilleRoute;
+import com.sortir.sortir.entity.Lieu;
 import com.sortir.sortir.entity.Site;
 import com.sortir.sortir.entity.Ville;
 import com.sortir.sortir.repository.LieuRepository;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -37,6 +40,9 @@ public class SiteController {
     VilleRepository villeRepository;
 
     @Autowired
+    LieuRepository lieuRepository;
+
+    @Autowired
     ParticipantRepository participantRepository;
 
 
@@ -47,28 +53,47 @@ public class SiteController {
 
         SiteRoute route = new SiteRoute();
         model.addAttribute("route",route);
+        model.addAttribute("villes",villeRepository.findAll());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
-        model.addAttribute("sites", siteRepository.findAll());
+        model.addAttribute("sites", lieuRepository.findAll());
 
         return route.getTemplate();
     }
 
     @PostMapping("/site/")
-    public String addValidation(Principal principal,@RequestParam("site") String siteParam,Model model){
+    public RedirectView addValidation(Principal principal,@RequestParam("site") String siteParam,
+                                      @RequestParam("ville") Integer ville,
+                                      @RequestParam("rue") String rue,
+                                      @RequestParam("latitude") String latitude,
+                                      @RequestParam("longitude") String longitude,
+                                        Model model, RedirectAttributes ra) throws Exception {
 
         SiteRoute route = new SiteRoute();
         model.addAttribute("route",route);
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
-        Site site = new Site();
+        Lieu site = new Lieu();
         site.setLibelle(siteParam);
 
-        siteRepository.save(site);
+        String newLongitude = longitude.replace(",",".");
+        String newLatitude = latitude.replace(",",".");
 
-        model.addAttribute("sites", siteRepository.findAll());
+        site.setLongitude(new Float(newLongitude));
+        site.setLatitude(new Float(newLatitude));
 
-        return route.getTemplate();
+        site.setRue(rue);
+        site.setVille(villeRepository.getOne(ville));
+
+        if (checkSite(siteParam) && checkIfExist(siteParam)) {
+            lieuRepository.save(site);
+        } else {
+            ra.addFlashAttribute("errors", errors);
+        }
+
+        model.addAttribute("sites", lieuRepository.findAll());
+
+        return new RedirectView("/site/");
     }
 
     @PostMapping("/site/rechercher/")
@@ -78,7 +103,7 @@ public class SiteController {
         model.addAttribute("route",route);
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
         model.addAttribute("filtre", siteParam);
-        model.addAttribute("sites", siteRepository.findAllByLibelleContaining(siteParam));
+        model.addAttribute("sites", lieuRepository.findAllByLibelleContaining(siteParam));
 
         return route.getTemplate();
     }
@@ -89,42 +114,127 @@ public class SiteController {
         SiteEditRoute route = new SiteEditRoute();
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
         model.addAttribute("route",route);
+        model.addAttribute("villes",villeRepository.findAll());
 
-        model.addAttribute("site", siteRepository.findById(id).get());
+        model.addAttribute("site", lieuRepository.findById(id).get());
 
         return route.getTemplate();
     }
 
     @PostMapping("/site/edit/{id}/")
-    public RedirectView editValidation(Principal principal,@PathVariable Integer id, @RequestParam("site") String site, Model model){
+    public RedirectView editValidation(Principal principal, @PathVariable Integer id, @RequestParam("site") String site,
+                                       @RequestParam("ville") Integer ville,
+                                       @RequestParam("rue") String rue,
+                                       @RequestParam("latitude") String latitude,
+                                       @RequestParam("longitude") String longitude, Model model, RedirectAttributes ra) throws Exception {
 
         SiteRoute route = new SiteRoute();
         model.addAttribute("route",route);
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
-        Site site1 = siteRepository.getOne(id);
+        Lieu site1 = lieuRepository.getOne(id);
         site1.setLibelle(site);
-        siteRepository.save(site1);
+        site1.setVille(villeRepository.getOne(ville));
+        site1.setRue(rue);
 
-        model.addAttribute("sites", siteRepository.findAll());
+        String newLongitude = longitude.replace(",",".");
+        String newLatitude = latitude.replace(",",".");
 
-        return new RedirectView(route.getUrl());
+        site1.setLongitude(new Float(newLongitude));
+        site1.setLatitude(new Float(newLatitude));
+
+        if (checkSite(site)) {
+            lieuRepository.save(site1);
+        } else {
+            ra.addFlashAttribute("errors", errors);
+            return new RedirectView("/site/edit/"+id+"/");
+        }
+
+        model.addAttribute("sites", lieuRepository.findAll());
+
+        return new RedirectView("/site/");
     }
 
     @GetMapping("/site/delete/{id}/")
-    public String delete(Principal principal,@PathVariable Integer id, Model model) {
+    public RedirectView delete(Principal principal,@PathVariable Integer id, Model model, RedirectAttributes ra) throws Exception {
 
         SiteRoute route = new SiteRoute();
         model.addAttribute("route",route);
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
-        siteRepository.deleteById(id);
+        if (checkIfAttached(id)) {
+            lieuRepository.deleteById(id);
+        } else {
+            ra.addFlashAttribute("errors", errors);
+        }
 
-        model.addAttribute("sites", siteRepository.findAll());
+        model.addAttribute("sites", lieuRepository.findAll());
 
-        return route.getTemplate();
+        return new RedirectView("/site/");
+    }
+
+    public Boolean checkSite(String site) throws Exception {
+
+        //On vide la liste d'erreur
+        errors.removeAll(errors);
+
+        if (site == null || site.isEmpty()) {
+            errors.add("Le site ne peut pas être vide.");
+        }
+
+        if (!errors.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 
+    public boolean checkIfExist(String lieu) {
+
+        for (int i = 0; i < lieuRepository.findAll().size(); i++) {
+            if (lieuRepository.findAll().get(i).getLibelle().toLowerCase().equals(lieu.toLowerCase())) {
+                errors.add("Ce site (" + lieu + ") existe déjà.");
+            }
+        }
+
+        if (!errors.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean checkIfAttached(Integer id) throws Exception {
+
+        //On vide la liste d'erreur
+        errors.removeAll(errors);
+
+        List<SortieDto> sortieList = sortieService.findAll();
+
+        int compteur = 0;
+
+        for (int i = 0; i < sortieList.size(); i++) {
+
+            if (sortieList.get(i).getLieu().getId() == id) {
+                compteur = compteur + 1;
+            }
+        }
+
+        if (compteur == 1) {
+            errors.add("Impossible de supprimer ce site. Il est lié à " + compteur + " sortie.");
+        }
+        if (compteur > 1) {
+            errors.add("Impossible de supprimer ce site. Il est lié à " + compteur + " sorties.");
+        }
+
+        if (!errors.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
 
 }

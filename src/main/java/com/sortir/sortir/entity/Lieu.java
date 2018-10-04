@@ -7,6 +7,7 @@ public class Lieu {
 
     @Id
     @Column(name="no_lieu")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="nom_lieu")

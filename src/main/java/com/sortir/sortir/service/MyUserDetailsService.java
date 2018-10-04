@@ -21,13 +21,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
         Participant user = userRepository.findByPseudo(username);
 
-        System.out.println(user.getPseudo());
-        System.out.println(user.getPassword());
-
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        System.out.println(bCryptPasswordEncoder.encode("1234"));
-
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

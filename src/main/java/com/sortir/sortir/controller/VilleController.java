@@ -48,10 +48,10 @@ public class VilleController {
     List<String> errors = new ArrayList<>();
 
     @GetMapping("/ville/")
-    public String add(Model model, Principal principal){
+    public String add(Model model, Principal principal) {
 
         VilleRoute route = new VilleRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
 
         model.addAttribute("villes", villeRepository.findAll());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
@@ -63,13 +63,13 @@ public class VilleController {
     public RedirectView addValidation(Principal principal, @RequestParam("ville") String villeParam, @RequestParam("codePostal") String codePostal, Model model, RedirectAttributes ra) throws Exception {
 
         VilleRoute route = new VilleRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
 
         Ville ville = new Ville();
         ville.setCodePostal(codePostal);
         ville.setVille(villeParam);
 
-        if (checkVille(villeParam,codePostal)) {
+        if (checkVille(villeParam, codePostal) && checkIfExist(villeParam,codePostal)) {
             villeRepository.save(ville);
         } else {
             ra.addFlashAttribute("errors", errors);
@@ -82,10 +82,10 @@ public class VilleController {
     }
 
     @PostMapping("/ville/rechercher/")
-    public String search(Principal principal,@RequestParam("ville") String villeParam,Model model){
+    public String search(Principal principal, @RequestParam("ville") String villeParam, Model model) {
 
         VilleRoute route = new VilleRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
         model.addAttribute("filtre", villeParam);
         model.addAttribute("villes", villeRepository.findAllByVilleContaining(villeParam));
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
@@ -94,10 +94,10 @@ public class VilleController {
     }
 
     @GetMapping("/ville/edit/{id}/")
-    public String add(Principal principal,@PathVariable Integer id, Model model){
+    public String edit(Principal principal, @PathVariable Integer id, Model model) {
 
         VilleEditRoute route = new VilleEditRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
 
         model.addAttribute("ville", villeRepository.findById(id).get());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
@@ -106,15 +106,15 @@ public class VilleController {
     }
 
     @PostMapping("/ville/edit/{id}/")
-    public RedirectView editValidation(Principal principal,@PathVariable Integer id,@RequestParam("ville") String villeParam, @RequestParam("codePostal") String codePostal, Model model, RedirectAttributes ra) throws Exception {
+    public RedirectView editValidation(Principal principal, @PathVariable Integer id, @RequestParam("ville") String villeParam, @RequestParam("codePostal") String codePostal, Model model, RedirectAttributes ra) throws Exception {
 
         VilleRoute route = new VilleRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
         Ville ville = villeRepository.getOne(id);
         ville.setVille(villeParam);
         ville.setCodePostal(codePostal);
 
-        if (checkVille(villeParam,codePostal)) {
+        if (checkVille(villeParam, codePostal)) {
             villeRepository.save(ville);
         } else {
             ra.addFlashAttribute("errors", errors);
@@ -124,14 +124,14 @@ public class VilleController {
         model.addAttribute("villes", villeRepository.findAll());
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
-        return new RedirectView(route.getUrl()+"edit/"+id+"/");
+        return new RedirectView(route.getUrl() + "edit/" + id + "/");
     }
 
     @GetMapping("/ville/delete/{id}/")
-    public RedirectView delete(Principal principal,@PathVariable Integer id, Model model, RedirectAttributes ra) throws Exception {
+    public RedirectView delete(Principal principal, @PathVariable Integer id, Model model, RedirectAttributes ra) throws Exception {
 
         VilleRoute route = new VilleRoute();
-        model.addAttribute("route",route);
+        model.addAttribute("route", route);
 
         if (checkIfAttached(villeRepository.getOne(id).getId())) {
             villeRepository.deleteById(id);
@@ -158,9 +158,20 @@ public class VilleController {
             errors.add("Le code postal ne peut pas être vide.");
         }
 
-        for(int i=0;i<villeRepository.findAll().size();i++){
-            if(villeRepository.findAll().get(i).getVille().toLowerCase().equals(ville.toLowerCase()) && villeRepository.findAll().get(i).getCodePostal().toLowerCase().equals(codePostal.toLowerCase())){
-                errors.add("Cette ville ("+ville+") existe déjà avec ce code postal ("+codePostal+").");
+
+        if (!errors.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public boolean checkIfExist(String ville, String codePostal) {
+
+        for (int i = 0; i < villeRepository.findAll().size(); i++) {
+            if (villeRepository.findAll().get(i).getVille().toLowerCase().equals(ville.toLowerCase()) && villeRepository.findAll().get(i).getCodePostal().toLowerCase().equals(codePostal.toLowerCase())) {
+                errors.add("Cette ville (" + ville + ") existe déjà avec ce code postal (" + codePostal + ").");
             }
         }
 
@@ -169,7 +180,6 @@ public class VilleController {
         } else {
             return true;
         }
-
     }
 
     public Boolean checkIfAttached(Integer id) throws Exception {
@@ -182,30 +192,30 @@ public class VilleController {
         int compteur = 0;
         int compteur2 = 0;
 
-        for(int i=0;i<sortieList.size();i++){
+        for (int i = 0; i < sortieList.size(); i++) {
 
-            if (sortieList.get(i).getLieu().getVille().getId()== id) {
-                compteur = compteur+1;
+            if (sortieList.get(i).getLieu().getVille().getId() == id) {
+                compteur = compteur + 1;
             }
         }
-        for(int i=0;i<participantRepository.findAll().size();i++){
+        for (int i = 0; i < participantRepository.findAll().size(); i++) {
 
-            if (participantRepository.findAll().get(i).getVille().getId()== id) {
-                compteur2 = compteur2+1;
-                System.out.println("compteur2 = "+compteur2);
+            if (participantRepository.findAll().get(i).getVille().getId() == id) {
+                compteur2 = compteur2 + 1;
+                System.out.println("compteur2 = " + compteur2);
             }
         }
 
-        if(compteur==1){
+        if (compteur == 1) {
             errors.add("Impossible de supprimer cette ville. Elle est liée à " + compteur + " sortie.");
         }
-        if(compteur>1){
+        if (compteur > 1) {
             errors.add("Impossible de supprimer cette ville. Elle est liée à " + compteur + " sorties.");
         }
-        if(compteur2==1){
+        if (compteur2 == 1) {
             errors.add("Impossible de supprimer cette ville. Elle est liée à " + compteur2 + " participant.");
         }
-        if(compteur2>1){
+        if (compteur2 > 1) {
             errors.add("Impossible de supprimer cette ville. Elle est liée à " + compteur2 + " participants.");
         }
 
@@ -216,7 +226,6 @@ public class VilleController {
         }
 
     }
-
 
 
 }
