@@ -99,7 +99,7 @@
         </div>
     </form>
 </div>
-<button onclick="window.location.href = '/profile/">Click me</button>
+
 </div>
 
     <div class="col-lg-12" style="margin-top:30px;">
@@ -119,7 +119,7 @@
                 </thead>
                 <#list sorties as sortie>
                 <tbody>
-                    <tr>
+                    <tr onclick="window.location.href = '/sortie/show/${sortie.id}/';" style="cursor: pointer;">
                         <td class="hidden-xs-down"><#if sortie.nom??>${sortie.nom}</#if></td>
                         <td><#if sortie.date??>${sortie.date}</#if></td>
                         <td class="d-none d-lg-table-cell"><#if sortie.cloture??>${sortie.cloture}</#if></td>
