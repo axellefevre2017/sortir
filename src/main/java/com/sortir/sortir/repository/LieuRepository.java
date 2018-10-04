@@ -1,6 +1,7 @@
 package com.sortir.sortir.repository;
 
 import com.sortir.sortir.entity.Lieu;
+import com.sortir.sortir.entity.Site;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,6 @@ public interface LieuRepository extends JpaRepository<Lieu, Integer> {
     List<Lieu> findAll();
 
     Optional<Lieu> findById(Integer id);
+
+    List<Lieu> findAllByLibelleContaining(String libelle);
 }

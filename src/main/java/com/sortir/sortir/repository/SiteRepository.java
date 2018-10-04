@@ -13,6 +13,6 @@ public interface SiteRepository extends JpaRepository<Site, Integer> {
     @Override
     List<Site> findAll();
 
-    List<Site> findAllByLibelleContaining(String libelle);
+
 
 }
