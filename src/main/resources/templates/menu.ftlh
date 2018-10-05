@@ -45,3 +45,10 @@
         </#list>
     </div>
 </#if>
+<#if success?? >
+    <div class="col-offset-2 col-lg-10 alert alert-success" style="margin:0 auto;margin-top:10px;margin-bottom:10px;">
+        <#list success as succes>
+            <strong>Succès !</strong> ${succes}</br>
+        </#list>
+    </div>
+</#if>

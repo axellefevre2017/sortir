@@ -48,6 +48,8 @@ public class SiteController {
 
     List<String> errors = new ArrayList<>();
 
+    List<String> success = new ArrayList<>();
+
     @GetMapping("/site/")
     public String add(Principal principal, Model model){
 
@@ -87,6 +89,9 @@ public class SiteController {
 
         if (checkSite(siteParam) && checkIfExist(siteParam)) {
             lieuRepository.save(site);
+            success.removeAll(success);
+            success.add("Le site "+ site.getLibelle() + " a été correctement ajouté.");
+            ra.addFlashAttribute("success", success);
         } else {
             ra.addFlashAttribute("errors", errors);
         }
@@ -144,6 +149,9 @@ public class SiteController {
         site1.setLatitude(new Float(newLatitude));
 
         if (checkSite(site)) {
+            success.removeAll(success);
+            success.add("Le site "+ site1.getLibelle() + " a été correctement modifié.");
+            ra.addFlashAttribute("success", success);
             lieuRepository.save(site1);
         } else {
             ra.addFlashAttribute("errors", errors);
@@ -164,6 +172,9 @@ public class SiteController {
 
         if (checkIfAttached(id)) {
             lieuRepository.deleteById(id);
+            success.removeAll(success);
+            success.add("Le site "+ lieuRepository.getOne(id).getLibelle()+ " a été correctement supprimé.");
+            ra.addFlashAttribute("success", success);
         } else {
             ra.addFlashAttribute("errors", errors);
         }

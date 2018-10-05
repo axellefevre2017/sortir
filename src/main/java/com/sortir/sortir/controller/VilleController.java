@@ -46,6 +46,7 @@ public class VilleController {
 
 
     List<String> errors = new ArrayList<>();
+    List<String> success = new ArrayList<>();
 
     @GetMapping("/ville/")
     public String add(Model model, Principal principal) {
@@ -71,6 +72,9 @@ public class VilleController {
 
         if (checkVille(villeParam, codePostal) && checkIfExist(villeParam,codePostal)) {
             villeRepository.save(ville);
+            success.removeAll(success);
+            success.add("La ville " + villeParam + " a été correctement ajoutée.");
+            ra.addFlashAttribute("success", success);
         } else {
             ra.addFlashAttribute("errors", errors);
         }
@@ -116,6 +120,9 @@ public class VilleController {
 
         if (checkVille(villeParam, codePostal)) {
             villeRepository.save(ville);
+            success.removeAll(success);
+            success.add("La ville " + villeParam + " a été correctement modifiée.");
+            ra.addFlashAttribute("success", success);
         } else {
             ra.addFlashAttribute("errors", errors);
         }
@@ -134,6 +141,9 @@ public class VilleController {
         model.addAttribute("route", route);
 
         if (checkIfAttached(villeRepository.getOne(id).getId())) {
+            success.removeAll(success);
+            success.add("La ville " + villeRepository.getOne(id).getVille() + " a été correctement supprimé.");
+            ra.addFlashAttribute("success", success);
             villeRepository.deleteById(id);
         } else {
             ra.addFlashAttribute("errors", errors);

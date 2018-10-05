@@ -48,6 +48,9 @@ public class HomeController {
 
     List<String> errors = new ArrayList<>();
 
+    List<String> success = new ArrayList<>();
+
+
     @GetMapping("/")
     public String getHome(Model model, Principal principal) {
 
@@ -112,6 +115,9 @@ public class HomeController {
         if (checkProfil(principal.getName(), pseudo, nom, prenom, telephone, mail, password, confirmPassword)) {
             participantService.save(id, pseudo, nom, prenom, telephone, mail, password, ville);
             majContext(participantRepository.findByPseudo(pseudo), pseudo);
+            success.removeAll(success);
+            success.add("Profil modifié.");
+            ra.addFlashAttribute("success", success);
         } else {
             model.addAttribute("errors", errors);
             ra.addFlashAttribute("errors", errors);
