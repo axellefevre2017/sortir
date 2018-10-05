@@ -7,10 +7,7 @@ import com.sortir.sortir.controller.route.sortie.SortieShowRoute;
 import com.sortir.sortir.entity.Etat;
 import com.sortir.sortir.entity.Lieu;
 import com.sortir.sortir.entity.Participant;
-import com.sortir.sortir.repository.InscriptionRepository;
-import com.sortir.sortir.repository.LieuRepository;
-import com.sortir.sortir.repository.ParticipantRepository;
-import com.sortir.sortir.repository.VilleRepository;
+import com.sortir.sortir.repository.*;
 import com.sortir.sortir.service.SortieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -32,6 +29,9 @@ public class SortieController {
 
     @Autowired
     SortieService sortieService;
+
+    @Autowired
+    SortieRepository sortieRepository;
 
     @Autowired
     LieuRepository lieuRepository;
@@ -162,8 +162,11 @@ public class SortieController {
 
         SortieShowRoute route = new SortieShowRoute();
         model.addAttribute("route", route);
-
-
+        if(inscriptionRepository.countBySortieAndParticipant(sortieRepository.getOne(id).getId(),participantRepository.findByPseudo(principal.getName()).getId())>0){
+            model.addAttribute("inscrit", true);
+        }else{
+            model.addAttribute("inscrit", false);
+        }
         model.addAttribute("sortie", sortieService.findById(id).get());
         model.addAttribute("participants", inscriptionRepository.findAllBySortie(id));
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));

@@ -26,7 +26,19 @@
 
 
         <div class="card-body" style="text-align: left;">
-            <h5 class="card-title" style="text-align: center;"> <#if sortie.nom??>${sortie.nom}</#if></h5>
+            <div style="display: flex">
+                <div style="flex: 1"></div>
+                <div style="flex: 2">
+                    <h5 class="card-title" style="text-align: center;"> <#if sortie.nom??>${sortie.nom}</#if></h5>
+                </div>
+                <div style="flex: 1">
+                    <#if inscrit == true>
+                        <a href="/sortie/show/${sortie.id}/desinscription/" class="btn btn-danger">Se Désinscrire</a>
+                        <#else>
+                        <a href="/sortie/show/${sortie.id}/inscription/" class="btn btn-primary">S'Inscrire</a>
+                    </#if>
+                </div>
+            </div>
             <hr>
 
             <div style="display:flex;">
