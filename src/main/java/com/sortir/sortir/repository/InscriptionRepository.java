@@ -24,4 +24,8 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Inscri
 
     @Query(value="SELECT COUNT(*) FROM Inscriptions a, Sorties b where a.sorties_no_sortie=b.no_sortie and a.sorties_no_sortie = :sortie", nativeQuery = true)
     Integer countBySortie(@Param("sortie") Integer sortie);
+
+    @Query(value = "SELECT * FROM Inscriptions where sorties_no_sortie = :sortie and participants_no_participant = :participant", nativeQuery = true)
+    Inscription findByParticipantAndSortie(@Param("sortie") Integer sortie, @Param("participant") Integer participant);
+
 }

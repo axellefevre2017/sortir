@@ -2,6 +2,7 @@ package com.sortir.sortir.controller;
 
 import com.sortir.sortir.controller.route.HomeRoute;
 import com.sortir.sortir.controller.route.ProfilRoute;
+import com.sortir.sortir.controller.route.ProfilShowRoute;
 import com.sortir.sortir.entity.Participant;
 import com.sortir.sortir.repository.LieuRepository;
 import com.sortir.sortir.repository.ParticipantRepository;
@@ -17,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -92,6 +94,19 @@ public class HomeController {
         model.addAttribute("route", route);
 
         model.addAttribute("villes", villeRepository.findAll());
+        model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
+
+        return route.getTemplate();
+    }
+
+    @GetMapping("/profil/{id}/")
+    public String getProfil(Model model, Principal principal, @PathVariable Integer id) {
+
+        ProfilShowRoute route = new ProfilShowRoute();
+        model.addAttribute("route", route);
+
+        model.addAttribute("villes", villeRepository.findAll());
+        model.addAttribute("profil", participantRepository.getOne(id));
         model.addAttribute("user", participantRepository.findByPseudo(principal.getName()));
 
         return route.getTemplate();

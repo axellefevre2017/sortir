@@ -101,8 +101,10 @@
                 </thead>
                 <tbody>
         <#list participants as participant>
+        <tr onclick="window.location.href = '/profil/${participant.id.participant.id}/';">
         <td>${participant.id.participant.pseudo}</td>
         <td>${participant.id.participant.prenom + ' ' + participant.id.participant.nom}</td>
+        </tr>
         </#list>
                 </tbody>
             </table>
