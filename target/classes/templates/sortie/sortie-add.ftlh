@@ -5,7 +5,6 @@
 </head>
 <body>
 <#include "../menu.ftlh">
-<#include "../breadcrumb.ftlh">
 
 <div class="container">
 
@@ -44,19 +43,12 @@
         </div>
         <div class="form-group">
             <label for="lieu">Lieu</label>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <select class="form-control" id="lieu" name="lieu">
                 <#list lieux as lieu>
                     <option value="${lieu.id}"  <#if sortie?? && sortie.lieu.id==lieu.id>selected</#if>>${lieu.libelle}</option>
                 </#list>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="latitude">Latitude</label>
-            <input type="text" class="form-control" id="latitude" name="latitude" <#if sortie??>value="${sortie.lieu.latitude}"</#if>>
-        </div>
-        <div class="form-group">
-            <label for="longitude">Longitude</label>
-            <input type="text" class="form-control" id="longitude" name="longitude" <#if sortie??>value="${sortie.lieu.longitude}"</#if>>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="publier" name="etat" <#if sortie?? && sortie.etat.id==3>checked</#if>>

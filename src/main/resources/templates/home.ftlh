@@ -7,7 +7,7 @@
 <body>
 <#include "menu.ftlh">
 <div style="margin-left:15px;margin-top:20px;margin-bottom: 15px;" class="d-none d-lg-table-cell">
-    <h4 style="margin-left:15px;display:inline;" data-toggle="collapse" data-target="#demo">Filtrer les sorties</h4>
+    <h4 style="margin-left:15px;display:inline;" data-toggle="collapse" data-target="#demo" style="cursor: pointer;">Filtrer les sorties</h4>
     <i class="fas fa-angle-down fa-2x" data-toggle="collapse" data-target="#demo" style="display:inline; position :relative;top : 5px;"></i>
 </div>
 

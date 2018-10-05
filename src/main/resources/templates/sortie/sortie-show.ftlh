@@ -87,32 +87,41 @@
 
 
 
-
-<center>
-    <div class="card" style="width: 35rem;margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;">
+<div class="container">
+    <div class="justify-content-md-center ">
+<div class="card col-lg-4 col-lg-offset-2">
+<div style="margin-bottom: 0px;margin-top:25px;padding-bottom: 10px;padding-left: 0px;padding-right: 0px;">
 
         <div class="card-body" style="text-align: left;">
             <h5 class="card-title" style="text-align: center;">Liste des participants</h5>
             <hr>
 <table class="table table-bordered">
                 <thead>
-                <th>Pseudo</th>
-                <th>Nom</th>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                    </tr>
                 </thead>
                 <tbody>
         <#list participants as participant>
-        <tr onclick="window.location.href = '/profil/${participant.id.participant.id}/';">
+        <tr onclick="window.location.href = '/profil/${participant.id.participant.id}/';" style="cursor: pointer;">
         <td>${participant.id.participant.pseudo}</td>
         <td>${participant.id.participant.prenom + ' ' + participant.id.participant.nom}</td>
         </tr>
         </#list>
+                </tr>
                 </tbody>
             </table>
         </div>
-        <#if sortie.lieu.latitude?? && sortie.lieu.longitude??>
-        <div id="mapid" style="width: 600px; height: 400px;"></div>
-        <script>
 
+</div>
+    </div>
+
+        <div class="justify-content-md-center ">
+        <div class="col-lg-5" style="margin-bottom: 50px;">
+    <#if sortie.lieu.latitude?? && sortie.lieu.longitude??>
+        <div id="mapid" style="width: 500px; height: 450px;"></div>
+        <script>
             var mymap = L.map('mapid').setView([${sortie.lieu.latitude?string["0.#######"]?replace(",", ".")}, ${sortie.lieu.longitude?string["0.#######"]?replace(",", ".")}], 13);
             var marker = L.marker([${sortie.lieu.latitude?string["0.#######"]?replace(",", ".")}, ${sortie.lieu.longitude?string["0.#######"]?replace(",", ".")}]).addTo(mymap);
 
@@ -122,13 +131,19 @@
             }).addTo(mymap);
 
         </script>
-        </#if>
-
-    </div>
-</center>
+    </#if>
+        </div>
 
 
 
+
+
+
+
+
+        </div>
+
+</div>
 
 
 
