@@ -7,7 +7,7 @@
 <body>
 <#include "menu.ftlh">
 
-<div style="margin-left:15px;margin-top:20px;margin-bottom: 15px;">
+<div style="margin-left:15px;margin-top:20px;margin-bottom: 15px;" class="d-none d-lg-table-cell">
     <h4 style="display:inline;">Filtrer les sorties</h4>
     <i class="fas fa-angle-down fa-2x" data-toggle="collapse" data-target="#demo" style="display:inline; position :relative;top : 5px;"></i>
 </div>
@@ -107,27 +107,27 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="hidden-xs-down">Nom de la sortie</th>
+                        <th>Nom de la sortie</th>
                         <th>Date de la sortie</th>
                         <th class="d-none d-lg-table-cell">Clôture</th>
-                        <th class="">Inscrits/Places</th>
-                        <th>Etat</th>
-                        <th>Inscrit</th>
-                        <th>Organisateur</th>
-                        <th>Action</th>
+                        <th class="d-none d-lg-table-cell">Inscrits/Places</th>
+                        <th class="d-none d-lg-table-cell">Etat</th>
+                        <th class="d-none d-lg-table-cell">Inscrit</th>
+                        <th class="d-none d-lg-table-cell">Organisateur</th>
+                        <th class="d-none d-lg-table-cell">Action</th>
                     </tr>
                 </thead>
                 <#list sorties as sortie>
                 <tbody>
                     <tr onclick="window.location.href = '/sortie/show/${sortie.id}/';" style="cursor: pointer;">
-                        <td class="hidden-xs-down"><#if sortie.nom??>${sortie.nom}</#if></td>
+                        <td><#if sortie.nom??>${sortie.nom}</#if></td>
                         <td><#if sortie.date??>${sortie.date}</#if></td>
                         <td class="d-none d-lg-table-cell"><#if sortie.cloture??>${sortie.cloture}</#if></td>
-                        <td  style="text-align: center;"><#if sortie.nb??>${sortie.nb}/${sortie.max}</#if></td>
-                        <td><#if sortie.etat??>${sortie.etat.libelle}</#if></td>
-                        <td style="text-align: center;"><#if sortie.inscrit == true><i class="fas fa-check" style="color:green;"></i><#else></#if></td>
-                        <td><#if sortie.participant??>${sortie.participant.nom + ' ' + sortie.participant.prenom}</#if></td>
-                        <td>
+                        <td class="d-none d-lg-table-cell" style="text-align: center;"><#if sortie.nb??>${sortie.nb}/${sortie.max}</#if></td>
+                        <td class="d-none d-lg-table-cell"><#if sortie.etat??>${sortie.etat.libelle}</#if></td>
+                        <td class="d-none d-lg-table-cell" style="text-align: center;"><#if sortie.inscrit == true><i class="fas fa-check" style="color:green;"></i><#else></#if></td>
+                        <td class="d-none d-lg-table-cell"><#if sortie.participant??>${sortie.participant.nom + ' ' + sortie.participant.prenom}</#if></td>
+                        <td class="d-none d-lg-table-cell">
                             <div style="display:flex;text-align: center;">
                                 <div style="flex:1">
                                     <a href="/sortie/edit/${sortie.id}/"><i class="fas fa-edit"  style="color:#007bff;"></i></a>
@@ -142,7 +142,7 @@
                 </tbody>
                 </#list>
             </table>
-            <a href="/sortie/add/" class="btn btn-primary">Ajouter</a>
+            <a href="/sortie/add/" class="btn btn-primary d-none d-lg-table-cell">Ajouter</a>
 
     </div>
 

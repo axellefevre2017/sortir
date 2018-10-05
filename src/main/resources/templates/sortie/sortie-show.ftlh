@@ -13,8 +13,10 @@
 
 
 <center>
-    <div class="card" style="width: 75rem;margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;">
+    <div class="card col-lg-8 col-lg-offset-2 col-sm-9 col-sm-offset-1" style="margin-bottom: 50px;margin-top:25px;padding-bottom: 10px;padding-left: 0px;padding-right: 0px;">
+
         <div style="height:120px;background-color: #1fc8db;background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
+
             <img style="height:200px;width:200px;margin-top:10px;" class="card-img-top rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Colombus_Isle.JPG/1200px-Colombus_Isle.JPG"
                  alt="Card image cap">
 
