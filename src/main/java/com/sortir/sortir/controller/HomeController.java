@@ -66,6 +66,12 @@ public class HomeController {
         return route.getTemplate();
     }
 
+    @GetMapping("/login")
+    public String getLogin() {
+
+        return "login";
+    }
+
     @PostMapping("/")
     public String filter(Model model, Principal principal,
                          @RequestParam @Nullable Integer site,

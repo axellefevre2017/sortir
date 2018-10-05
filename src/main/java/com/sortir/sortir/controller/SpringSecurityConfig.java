@@ -19,21 +19,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
-   /* @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest()//allow all urls
-                .authenticated()//all URLs are allowed by any authenticated user, no role restrictions.
+        http
+                .authorizeRequests()
+                .antMatchers("/resources/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()//enable form based authentication
-                .loginPage("/login")//use a custom login URI
-                .permitAll(true)//login URI can be accessed by anyone
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                .logout()//default logout handling
-                .logoutSuccessUrl("/login?logout")//our new logout success url, we are not replacing other defaults.
-                .permitAll();//allow all as it will be accessed when user is not logged in anymore
+                .logout()
+                .permitAll();
+    }
 
-    }*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -41,7 +41,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
 
     }
-
 
 
     @Bean
