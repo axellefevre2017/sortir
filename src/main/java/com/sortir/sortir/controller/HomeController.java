@@ -171,7 +171,7 @@ public class HomeController {
             majContext(participantRepository.findByPseudo(user), pseudo);
         }
         if (pseudo == null || pseudo.isEmpty()) {
-            errors.add("Le mot de passe ne peut pas être vide.");
+            errors.add("Le pseudo ne peut pas être vide.");
         }
         if (nom == null || nom.isEmpty()) {
             errors.add("Le nom ne peut pas être vide.");

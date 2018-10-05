@@ -7,6 +7,7 @@ public class Participant {
 
     @Id
     @Column(name="no_participant")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String pseudo;
     private String password;
