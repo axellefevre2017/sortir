@@ -23,6 +23,8 @@
             <button type="submit" class="btn btn-primary">Modifier</button>
             </tfoot>
         </form>
+    <#else>
+<p style="margin-left:50px;margin-top:10px;color:red;font-size: 17px">Vous n'êtes pas autorisé à accéder à cette page</p>
     </#if>
 </div>
 

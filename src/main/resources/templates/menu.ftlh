@@ -17,6 +17,9 @@
             <li class="nav-item <#if route.getMenu()=='site'>active</#if>">
                 <a class="nav-link waves-effect waves-light" href="/site/">SITES</a>
             </li>
+            <li class="nav-item <#if route.getMenu()=='utilisateur'>active</#if>">
+                <a class="nav-link waves-effect waves-light" href="/participant/">UTILISATEURS</a>
+            </li>
             </#if>
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
