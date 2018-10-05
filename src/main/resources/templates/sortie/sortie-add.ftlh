@@ -50,14 +50,6 @@
                 </#list>
             </select>
         </div>
-        <div class="form-group">
-            <label for="latitude">Latitude</label>
-            <input type="text" class="form-control" id="latitude" name="latitude" <#if sortie??>value="${sortie.lieu.latitude}"</#if>>
-        </div>
-        <div class="form-group">
-            <label for="longitude">Longitude</label>
-            <input type="text" class="form-control" id="longitude" name="longitude" <#if sortie??>value="${sortie.lieu.longitude}"</#if>>
-        </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="publier" name="etat" <#if sortie?? && sortie.etat.id==3>checked</#if>>
             <label class="form-check-label" for="publier" >

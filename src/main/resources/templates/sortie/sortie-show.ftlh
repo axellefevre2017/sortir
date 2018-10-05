@@ -2,6 +2,11 @@
 <head>
     <#include "../import.ftlh">
     <title>${route.getName()}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+    <style>
+        #mapid { height: 300px; }
+    </style>
 </head>
 <body>
 <#include "../menu.ftlh">
@@ -53,8 +58,8 @@
             <#if sortie.lieu.libelle??>${sortie.lieu.libelle}</#if></br>
             <#if sortie.lieu.rue??>${sortie.lieu.rue}</#if></br>
             <#if sortie.lieu.ville.codePostal??>${sortie.lieu.ville.codePostal}</#if></br>
-            <#if sortie.lieu.latitude??>${sortie.lieu.latitude?string["0.######"]}</#if></br>
-            <#if sortie.lieu.longitude??>${sortie.lieu.longitude?string["0.######"]}</#if></br>
+            <#if sortie.lieu.latitude??>${sortie.lieu.latitude?string["0.#######"]}</#if></br>
+            <#if sortie.lieu.longitude??>${sortie.lieu.longitude?string["0.#######"]}</#if></br>
                 </div>
 
 
@@ -88,8 +93,23 @@
                 </tbody>
             </table>
         </div>
+        <#if sortie.lieu.latitude?? && sortie.lieu.longitude??>
+        <div id="mapid" style="width: 600px; height: 400px;"></div>
+        <script>
 
+            var mymap = L.map('mapid').setView([${sortie.lieu.latitude?string["0.#######"]?replace(",", ".")}, ${sortie.lieu.longitude?string["0.#######"]?replace(",", ".")}], 13);
+            var marker = L.marker([${sortie.lieu.latitude?string["0.#######"]?replace(",", ".")}, ${sortie.lieu.longitude?string["0.#######"]?replace(",", ".")}]).addTo(mymap);
 
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(mymap);
+
+        </script>
+        </#if>
 
     </div>
 </center>
